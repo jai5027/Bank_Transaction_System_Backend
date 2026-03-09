@@ -48,5 +48,61 @@ async function sendRegistrationEmail(userEmail, name) {
   await sendEmail(userEmail, subject, text, html);
 }  
 
+async function sendTransactionEmail(userEmail, name, amount, toAccount) {
 
-module.exports = sendRegistrationEmail
+  const subject = "Transaction Successful";
+
+  const text = `Hello ${name},
+
+Your transaction was successful.
+
+Amount Sent: ₹${amount}
+To Account: ${toAccount}
+
+Thank you for using BT.`;
+
+  const html = `
+    <p>Hello ${name},</p>
+
+    <p>Your transaction was <b>successful</b>.</p>
+
+    <p>
+      <b>Amount Sent:</b> ₹${amount} <br/>
+      <b>To Account:</b> ${toAccount}
+    </p>
+
+    <p>Thank you for using BT.</p>
+  `;
+
+  await sendEmail(userEmail, subject, text, html);
+}
+
+async function sendTransactionFailedEmail(userEmail, name, amount, toAccount) {
+
+  const subject = "Transaction Failed";
+  const text = `Hello ${name},
+
+Your transaction has failed.
+
+Amount: ₹${amount}
+To Account: ${toAccount}
+
+Please try again later.`;
+
+  const html = `
+    <p>Hello ${name},</p>
+
+    <p>Your transaction has <b>failed</b>.</p>
+
+    <p>
+      <b>Amount:</b> ₹${amount} <br/>
+      <b>To Account:</b> ${toAccount}
+    </p>
+
+    <p>Please try again later.</p>
+  `;
+
+  await sendEmail(userEmail, subject, text, html);
+}
+
+module.exports = { sendRegistrationEmail, sendTransactionEmail, sendTransactionFailedEmail }

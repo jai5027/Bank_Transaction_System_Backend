@@ -32,7 +32,7 @@ const transactionSchema = new mongoose.Schema({
     },
 
     idempotencyKey: {
-        true: String,
+        type: String,
         required: [true, "IdempotencyKey is required for creating a transaction"],
         index: true,
         unique: true
